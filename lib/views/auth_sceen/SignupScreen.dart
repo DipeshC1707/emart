@@ -9,9 +9,15 @@ import 'package:get/get.dart';
 
 import '../../widgets/applogowidget.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
 
+  @override
+  State<SignupScreen> createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
+  bool? isCheck = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +45,13 @@ class SignupScreen extends StatelessWidget {
             Row(
               children: [
                 Checkbox(
-                  value: false,
-                  onChanged: (newValue) {},
+                  activeColor: whiteColor,
+                  value: isCheck,
+                  onChanged: (newValue) {
+                    setState(() {
+                      isCheck = true;
+                    });
+                  },
                   checkColor: redColor,
                 ),
                 Expanded(
@@ -48,23 +59,23 @@ class SignupScreen extends StatelessWidget {
                       text: const TextSpan(children: [
                     TextSpan(
                         text: "I agree to the ",
-                        style: TextStyle(fontFamily: bold, color: fontGrey)),
+                        style: TextStyle(fontFamily: regular, color: fontGrey)),
                     TextSpan(
-                        text: "Terms and Conditions",
-                        style: TextStyle(fontFamily: bold, color: redColor)),
+                        text: "Terms and Conditions ",
+                        style: TextStyle(fontFamily: regular, color: redColor)),
                     TextSpan(
                         text: "&",
-                        style: TextStyle(fontFamily: bold, color: fontGrey)),
+                        style: TextStyle(fontFamily: regular, color: fontGrey)),
                     TextSpan(
-                        text: "Privacy Policy",
-                        style: TextStyle(fontFamily: bold, color: redColor)),
+                        text: " Privacy Policy",
+                        style: TextStyle(fontFamily: regular, color: redColor)),
                   ])),
                 ),
               ],
             ),
             5.heightBox,
             button(
-                    color: redColor,
+                    color: isCheck == true ? redColor : lightGrey,
                     textcolor: whiteColor,
                     title: "Sign Up",
                     onpress: () {})
