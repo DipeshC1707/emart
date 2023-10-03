@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:e_mart/consts/consts.dart';
+import 'package:e_mart/widgets/button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:e_mart/consts/colors.dart';
@@ -23,6 +24,19 @@ class ItemDetails extends StatelessWidget {
         IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
         IconButton(onPressed: () {}, icon: const Icon(Icons.favorite_outline)),
       ]),
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              color: redColor,
+            ),
+          ),
+          SizedBox(
+            child: button(color: redColor,onpress: (){},textcolor: whiteColor,title: "Add To Cart"),
+          )
+        ],
+
+      ),
     );
   }
 }
