@@ -1,3 +1,5 @@
+import 'package:e_mart/consts/colors.dart';
+import 'package:e_mart/consts/consts.dart';
 import 'package:e_mart/views/auth_sceen/LoginScreen.dart';
 import 'package:e_mart/views/splash_screen/splash_acreen.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +18,18 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
+      
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.transparent,
+        appBarTheme: const AppBarTheme(
+          iconTheme: IconThemeData(
+            color: darkFontGrey
+          ),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+
+        ),
+        fontFamily: regular,
         // This is the theme of your application.
         //
         // TRY THIS: Try running your application with "flutter run". You'll see
