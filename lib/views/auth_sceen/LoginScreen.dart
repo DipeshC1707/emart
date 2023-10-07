@@ -58,9 +58,12 @@ class LoginScreen extends StatelessWidget {
                     await controller
                         .loginMethod(context: context)
                         .then((value) {
-                      print(value);
-                      VxToast.show(context, msg: "Logged In Successfully");
-                      Get.offAll(() => const Home());
+                      if (value != null) {
+                        VxToast.show(context, msg: "Logged In Successfully");
+                        Get.offAll(() => const Home());
+                      } else {
+                        VxToast.show(context, msg: "Error");
+                      }
                     });
                   }).box.width(context.screenWidth - 50).make(),
               5.heightBox,
