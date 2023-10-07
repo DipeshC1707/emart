@@ -38,4 +38,6 @@ const categoryImages = [
   imgFc7,
   imgFc6,
   imgFc9,
-  ];
+];
+
+const itemDetailsButton = [video,reviews,privacypolicy,returnpolicy,supportpolicy];

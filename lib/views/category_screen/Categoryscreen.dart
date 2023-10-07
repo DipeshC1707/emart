@@ -38,7 +38,7 @@ class CategoryScreen extends StatelessWidget {
                   Image.asset(categoryImages[index],
                       height: 120, width: 200, fit: BoxFit.cover),
                   10.heightBox,
-                  "${categoryList[index]}"
+                  categoryList[index]
                       .text
                       .color(darkFontGrey)
                       .fontFamily(semibold).align(TextAlign.center)

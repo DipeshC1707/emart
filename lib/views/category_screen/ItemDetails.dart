@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:e_mart/consts/consts.dart';
+import 'package:e_mart/consts/lists.dart';
 import 'package:e_mart/widgets/button.dart';
 import 'package:flutter/material.dart';
 
@@ -101,7 +102,7 @@ class ItemDetails extends StatelessWidget {
                         .color(textfieldGrey)
                         .padding(const EdgeInsets.symmetric(horizontal: 16))
                         .make(),
-                        20.heightBox,
+                    20.heightBox,
                     Column(
                       children: [
                         Row(
@@ -116,7 +117,9 @@ class ItemDetails extends StatelessWidget {
                                   (index) => VxBox()
                                       .size(40, 40)
                                       .color(Vx.randomPrimaryColor)
-                                      .roundedFull.margin(const EdgeInsets.symmetric(horizontal: 8))
+                                      .roundedFull
+                                      .margin(const EdgeInsets.symmetric(
+                                          horizontal: 8))
                                       .make()),
                             )
                           ],
@@ -160,24 +163,89 @@ class ItemDetails extends StatelessWidget {
                                 .fontFamily(bold)
                                 .make()
                           ],
-                        ).box.padding(const EdgeInsets.all(8)).color(const Color.fromARGB(255, 255, 169, 169)).make()
+                        )
+                            .box
+                            .padding(const EdgeInsets.all(8))
+                            .color(const Color.fromARGB(255, 255, 169, 169))
+                            .make()
                       ],
                     ).box.white.shadowMax.make(),
 
                     10.heightBox,
 
-                    "Description".text.color(darkFontGrey).fontFamily(semibold).make(),
+                    "Description"
+                        .text
+                        .color(darkFontGrey)
+                        .fontFamily(semibold)
+                        .make(),
 
                     10.heightBox,
 
-                    "This is a dummyitem and dummy description... ".text.color(darkFontGrey).make(),
+                    "This is a dummyitem and dummy description... "
+                        .text
+                        .color(darkFontGrey)
+                        .make(),
+
+                    10.heightBox,
 
                     ListView(
                       shrinkWrap: true,
-                      children: List.generate(5, (index) => 
-                        ListTile(
-                          title: "Video".text.fontFamily(semibold).color(darkFontGrey).make()
-                        )
+                      children: List.generate(
+                          itemDetailsButton.length,
+                          (index) => ListTile(
+                                title: itemDetailsButton[index]
+                                    .text
+                                    .fontFamily(semibold)
+                                    .color(darkFontGrey)
+                                    .make(),
+                                trailing: const Icon(Icons.arrow_forward_ios),
+                              )),
+                    ),
+
+                    20.heightBox,
+
+                    "Product You May Also Like"
+                        .text
+                        .fontFamily(semibold)
+                        .color(darkFontGrey)
+                        .size(16)
+                        .make(),
+
+                    10.heightBox,
+                    //copied from homescreen.dart
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(
+                            6,
+                            (index) => Column(
+                                  children: [
+                                    Image.asset(
+                                      imgP1,
+                                      width: 150,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    10.heightBox,
+                                    "Laptop 4GB/64GB"
+                                        .text
+                                        .color(darkFontGrey)
+                                        .fontFamily(semibold)
+                                        .make(),
+                                    10.heightBox,
+                                    "44,999 ₹"
+                                        .text
+                                        .color(redColor)
+                                        .fontFamily(semibold)
+                                        .make()
+                                  ],
+                                )
+                                    .box
+                                    .white
+                                    .rounded
+                                    .margin(const EdgeInsets.symmetric(
+                                        horizontal: 10))
+                                    .padding(const EdgeInsets.all(8))
+                                    .make()),
                       ),
                     )
                   ],
