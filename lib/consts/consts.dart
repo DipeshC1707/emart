@@ -2,6 +2,7 @@ export './colors.dart';
 export './images.dart';
 export './strings.dart';
 export './styles.dart';
+export './firbaseconst.dart';
 export 'package:velocity_x/velocity_x.dart';
 
 const womenClothing = "Women Clothing and Accessories",

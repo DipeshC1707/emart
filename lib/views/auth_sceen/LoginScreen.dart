@@ -1,8 +1,10 @@
 import 'package:e_mart/consts/colors.dart';
 import 'package:e_mart/consts/consts.dart';
 import 'package:e_mart/consts/lists.dart';
+import 'package:e_mart/controllers/authcontoller.dart';
 import 'package:e_mart/views/auth_sceen/SignupScreen.dart';
 import 'package:e_mart/views/home_screen/Home.dart';
+import 'package:e_mart/views/home_screen/Homescreen.dart';
 import 'package:e_mart/widgets/bgwidget.dart';
 import 'package:e_mart/widgets/button.dart';
 import 'package:e_mart/widgets/textfield.dart';
@@ -16,6 +18,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(AuthController());
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
@@ -30,8 +34,16 @@ class LoginScreen extends StatelessWidget {
           10.heightBox,
           Column(
             children: [
-              textField(title: "Email", hint: "Enter Email"),
-              textField(title: "Password", hint: "Enter Password"),
+              textField(
+                  title: "Email",
+                  hint: "Enter Email",
+                  isPass: false,
+                  controller: controller.emailcontroller),
+              textField(
+                  title: "Password",
+                  hint: "Enter Password",
+                  isPass: true,
+                  controller: controller.passwordcontroller),
               Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
@@ -42,8 +54,14 @@ class LoginScreen extends StatelessWidget {
                   color: redColor,
                   textcolor: whiteColor,
                   title: "Log in",
-                  onpress: () {
-                    Get.to(() => const Home());
+                  onpress: () async {
+                    await controller
+                        .loginMethod(context: context)
+                        .then((value) {
+                      print(value);
+                      VxToast.show(context, msg: "Logged In Successfully");
+                      Get.offAll(() => const Home());
+                    });
                   }).box.width(context.screenWidth - 50).make(),
               5.heightBox,
               "or Create New Account".text.color(fontGrey).make(),
