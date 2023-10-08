@@ -32,76 +32,86 @@ class LoginScreen extends StatelessWidget {
           10.heightBox,
           "Log in to $appname".text.fontFamily(bold).white.size(22).make(),
           10.heightBox,
-          Column(
-            children: [
-              textField(
-                  title: "Email",
-                  hint: "Enter Email",
-                  isPass: false,
-                  controller: controller.emailcontroller),
-              textField(
-                  title: "Password",
-                  hint: "Enter Password",
-                  isPass: true,
-                  controller: controller.passwordcontroller),
-              Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                      onPressed: () {},
-                      child: "Forget Password?".text.size(16).make())),
-              5.heightBox,
-              button(
-                  color: redColor,
-                  textcolor: whiteColor,
-                  title: "Log in",
-                  onpress: () async {
-                    await controller
-                        .loginMethod(context: context)
-                        .then((value) {
-                      if (value != null) {
-                        VxToast.show(context, msg: "Logged In Successfully");
-                        Get.offAll(() => const Home());
-                      } else {
-                        VxToast.show(context, msg: "Error");
-                      }
-                    });
-                  }).box.width(context.screenWidth - 50).make(),
-              5.heightBox,
-              "or Create New Account".text.color(fontGrey).make(),
-              5.heightBox,
-              button(
-                  color: lightgolden,
-                  textcolor: redColor,
-                  title: "Sign Up",
-                  onpress: () {
-                    Get.to(() => const SignupScreen());
-                  }).box.width(context.screenWidth - 50).make(),
-              10.heightBox,
-              "Login With".text.color(fontGrey).make(),
-              5.heightBox,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  3,
-                  (index) => CircleAvatar(
-                      backgroundColor: lightGrey,
-                      radius: 25,
-                      child: Image.asset(
-                        socialIconList[index],
-                        width: 30,
-                        fit: BoxFit.fill,
-                      )),
-                ),
-              )
-            ],
-          )
-              .box
-              .white
-              .rounded
-              .padding(const EdgeInsets.all(16))
-              .width(context.screenWidth - 70)
-              .shadowSm
-              .make(),
+          Obx(
+            () => Column(
+              children: [
+                textField(
+                    title: "Email",
+                    hint: "Enter Email",
+                    isPass: false,
+                    controller: controller.emailcontroller),
+                textField(
+                    title: "Password",
+                    hint: "Enter Password",
+                    isPass: true,
+                    controller: controller.passwordcontroller),
+                Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                        onPressed: () {},
+                        child: "Forget Password?".text.size(16).make())),
+                5.heightBox,
+                controller.isLoading.value
+                    ? const CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation(redColor),
+                      )
+                    : button(
+                        color: redColor,
+                        textcolor: whiteColor,
+                        title: "Log in",
+                        onpress: () async {
+                          controller.isLoading(true);
+                          await controller
+                              .loginMethod(context: context)
+                              .then((value) {
+                            print(value);
+                            if (value != null) {
+                              VxToast.show(context,
+                                  msg: "Logged In Successfully");
+                              Get.offAll(() => const Home());
+                            } else {
+                              controller.isLoading(false);
+                              VxToast.show(context, msg: "Error");
+                            }
+                          });
+                        }).box.width(context.screenWidth - 50).make(),
+                5.heightBox,
+                "or Create New Account".text.color(fontGrey).make(),
+                5.heightBox,
+                button(
+                    color: lightgolden,
+                    textcolor: redColor,
+                    title: "Sign Up",
+                    onpress: () {
+                      Get.to(() => const SignupScreen());
+                    }).box.width(context.screenWidth - 50).make(),
+                10.heightBox,
+                "Login With".text.color(fontGrey).make(),
+                5.heightBox,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    3,
+                    (index) => CircleAvatar(
+                        backgroundColor: lightGrey,
+                        radius: 25,
+                        child: Image.asset(
+                          socialIconList[index],
+                          width: 30,
+                          fit: BoxFit.fill,
+                        )),
+                  ),
+                )
+              ],
+            )
+                .box
+                .white
+                .rounded
+                .padding(const EdgeInsets.all(16))
+                .width(context.screenWidth - 70)
+                .shadowSm
+                .make(),
+          ),
         ]))),
       ),
     );

@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     return bgWidget(
@@ -49,8 +49,8 @@ class ProfileScreen extends StatelessWidget {
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      "Dipesh Chavan".text.fontFamily(semibold).make(),
-                      "dipeshchavan8101@gmail.com".text.white.make()
+                      "${currentUser?.displayName}".text.fontFamily(semibold).make(),
+                      "${currentUser?.email}".text.white.make()
                     ],
                   )),
                   10.widthBox,
@@ -62,6 +62,7 @@ class ProfileScreen extends StatelessWidget {
                       onPressed: () async {
                         await Get.put(AuthController()).signoutMethod(context);
                         Get.offAll(() => const LoginScreen());
+                        // Get.put(AuthController()).isLoading = false as RxBool;
                       },
                       child: "Log Out".text.white.fontFamily(semibold).make())
                 ],
