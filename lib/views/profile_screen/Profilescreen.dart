@@ -1,17 +1,24 @@
 import 'package:e_mart/consts/consts.dart';
 import 'package:e_mart/consts/lists.dart';
 import 'package:e_mart/controllers/authcontoller.dart';
+import 'package:e_mart/controllers/profilecontroller.dart';
 import 'package:e_mart/views/auth_sceen/LoginScreen.dart';
 import 'package:e_mart/views/profile_screen/detailscard.dart';
+import 'package:e_mart/views/profile_screen/edirprofilescreen.dart';
+import 'package:e_mart/views/splash_screen/splash_acreen.dart';
 import 'package:e_mart/widgets/bgwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../home_screen/Home.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
+    var profilecontrolller = Get.put(ProfileController());
+    var controller = Get.put(AuthController());
     return bgWidget(
         child: Scaffold(
       body: SafeArea(
@@ -23,7 +30,9 @@ class ProfileScreen extends StatelessWidget {
                 child: Icon(
                   Icons.edit,
                   color: whiteColor,
-                )),
+                )).onTap(() {
+              Get.to(() => const EditProfile());
+            }),
             5.heightBox,
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -49,7 +58,10 @@ class ProfileScreen extends StatelessWidget {
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      "${currentUser?.displayName}".text.fontFamily(semibold).make(),
+                      "${currentUser?.displayName}"
+                          .text
+                          .fontFamily(semibold)
+                          .make(),
                       "${currentUser?.email}".text.white.make()
                     ],
                   )),
@@ -60,8 +72,11 @@ class ProfileScreen extends StatelessWidget {
                         color: whiteColor,
                       )),
                       onPressed: () async {
-                        await Get.put(AuthController()).signoutMethod(context);
-                        Get.offAll(() => const LoginScreen());
+                        await auth.signOut().then((value) {
+                          print(currentUser!.email);
+                          Get.offAll(() => const LoginScreen());
+                          VxToast.show(context, msg: "Logged Out Successfully");
+                        });
                         // Get.put(AuthController()).isLoading = false as RxBool;
                       },
                       child: "Log Out".text.white.fontFamily(semibold).make())
@@ -73,8 +88,7 @@ class ProfileScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 detailsCard(context.screenWidth / 3.4, "22", "In your cart"),
-                detailsCard(
-                    context.screenWidth / 3.4, "11", "In your wishlist"),
+                detailsCard(context.screenWidth / 3.4, "11", "Wishlist"),
                 detailsCard(context.screenWidth / 3.4, "0", "Your Orders"),
               ],
             ),

@@ -2,6 +2,7 @@ import 'package:e_mart/consts/colors.dart';
 import 'package:e_mart/consts/consts.dart';
 import 'package:e_mart/views/auth_sceen/LoginScreen.dart';
 import 'package:e_mart/views/profile_screen/Profilescreen.dart';
+import 'package:e_mart/views/profile_screen/edirprofilescreen.dart';
 import 'package:e_mart/views/splash_screen/splash_acreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +10,11 @@ import 'package:get/get.dart';
 import 'firebase_options.dart';
 
 void main() async {
+  
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
+  print(currentUser);
 }
 
 class MyApp extends StatelessWidget {
@@ -50,6 +53,6 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         initialRoute: "/",
-        home: const SplashScreen());
+        home: const ProfileScreen());
   }
 }

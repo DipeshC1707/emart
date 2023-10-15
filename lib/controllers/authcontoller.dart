@@ -32,7 +32,7 @@ class AuthController extends GetxController {
     return userCred;
   }
 
-  storeUserData({name, password, email}) async {
+  Future<void> storeUserData({name, password, email}) async {
     DocumentReference store =
         firestore.collection(usersCollection).doc(currentUser!.uid);
     store.set({
@@ -44,9 +44,9 @@ class AuthController extends GetxController {
     });
   }
 
-  signoutMethod(context) async {
+  Future<void> signoutMethod({context}) async {
     try {
-      await auth.signOut();
+       await auth.signOut();
       // isLoading = false;
     } catch (e) {
       VxToast.show(context, msg: e.toString());
